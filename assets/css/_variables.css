@@ -1,0 +1,17 @@
+@import url(_fonts.css);
+
+:root {
+  /* Color Palette */
+  --color-bg: #000;       /* Page background */
+  --color-text: #fff;       /* Page basic color */
+  --color-primary: #ffffff99;       /* Primary text */
+  --primary-bg-color: #08090abf;        /* Primary BG color */    
+  --base-btn-bg : rgba(255, 255, 255, 0.07);        /* base btn bg color */
+  /* Typography */
+  --primary-text : 'Inter 18pt';    /* Primary font */
+  --secondary-text : 'Instrument Serif';   /* Secondary font */
+
+  /* Border color */
+  --btn-border-color: #292b2b;
+
+}
