@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   
 
-  const text = document.querySelector(".hero__section-circle-text");
+const text = document.querySelector(".hero__section-circle-text");
 text.innerHTML = text.innerText
 	.split("")
 	.map(
@@ -101,4 +101,62 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const cards = gsap.utils.toArray(".results__process-card");
+
+  const positions = [
+    { right: "0%",  scale: 1,    opacity: 1,   blur: 0, z: 3 },
+    { right: "25%", scale: 0.9, opacity: 0.7, blur: 2, z: 2 },
+    { right: "50%", scale: 0.8,  opacity: 0.4, blur: 4, z: 1 }
+  ];
+
+  let activeIndex = 0;
+  let timer;
+
+  function render() {
+    cards.forEach((card, i) => {
+      const posIndex = (i - activeIndex + cards.length) % cards.length;
+      const p = positions[posIndex];
+
+      gsap.to(card, {
+        right: p.right,
+        scale: p.scale,
+        opacity: p.opacity,
+        zIndex: p.z,
+        filter: `blur(${p.blur}px)`,
+        duration: 0.9,
+        ease: "power3.out"
+      });
+    });
+  }
+
+  function shuffleLeftToRight() {
+    // LEFT → RIGHT movement
+    activeIndex = (activeIndex + 1) % cards.length;
+    render();
+  }
+
+  function startAuto() {
+    timer = setInterval(shuffleLeftToRight, 4000);
+  }
+
+  function restartShuffle() {
+    clearInterval(timer);
+    shuffleLeftToRight();
+    startAuto();
+  }
+
+  /* INIT */
+  render();
+  startAuto();
+
+  /* CLICK */
+  cards.forEach(card => {
+    card.addEventListener("click", restartShuffle);
+  });
+
 });

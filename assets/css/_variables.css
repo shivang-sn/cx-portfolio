@@ -1,17 +1,33 @@
 @import url(_fonts.css);
 
 :root {
-  /* Color Palette */
-  --color-bg: #000;       /* Page background */
-  --color-text: #fff;       /* Page basic color */
-  --color-primary: #ffffff99;       /* Primary text */
-  --primary-bg-color: #08090abf;        /* Primary BG color */    
-  --base-btn-bg : rgba(255, 255, 255, 0.07);        /* base btn bg color */
-  /* Typography */
-  --primary-text : 'Inter 18pt';    /* Primary font */
-  --secondary-text : 'Instrument Serif';   /* Secondary font */
+  /* =========================================================
+     Base Colors
+     ========================================================= */
+  --color-black: #000000;
+  --color-white: #ffffff;
 
-  /* Border color */
-  --btn-border-color: #292b2b;
+  /* =========================================================
+     Backgrounds
+     ========================================================= */
+  --bg-page: var(--color-black);
+  --bg-surface-primary: rgba(8, 9, 10, 0.75);
+  --bg-surface-button: #ffffff12;
 
+  /* =========================================================
+     Text
+     ========================================================= */
+  --text-primary: var(--color-white);
+  --text-secondary: rgba(255, 255, 255, 0.6);
+
+  /* =========================================================
+     Borders
+     ========================================================= */
+  --border-default: #292b2b;
+
+  /* =========================================================
+     Typography
+     ========================================================= */
+  --font-primary: "Inter", system-ui, sans-serif;
+  --font-secondary: "Instrument Serif", serif;
 }
