@@ -38,15 +38,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  const text = document.querySelector(".hero__section-circle-text");
-  text.innerHTML = text.innerText
-    .split("")
-    .map(
-      (char, i) =>
-        `<span style="transform:rotate(${i * 10.3}deg)">${char}</span>`,
-    )
-    .join("");
+const text = document.querySelector(".hero__section-circle-text");
 
+if(text){
+  text.innerHTML = text.innerText
+  .split("")
+  .map(
+    (char, i) =>
+      `<span style="transform:rotate(${i * 10.3}deg)">${char}</span>`
+  )
+  .join("");
+}
   const dots_cavas = document.querySelector("#particles-js");
   if (dots_cavas) {
     particlesJS("particles-js", {
@@ -386,8 +388,11 @@ $('.latest-projects__item-wrapper').on('mousemove',function(e){
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  const counter = document.querySelector(".trusted__number");
+ const counter = document.querySelector(".trusted__number");
+
+if(counter){
   const target = +counter.getAttribute("data-target");
+}
   let started = false;
 
   function startCounter() {
@@ -468,8 +473,6 @@ tabs.forEach(tab => {
 
 // select all titles
 
-gsap.registerPlugin(ScrollTrigger);
-
 document.querySelectorAll('.top-title-row-left-part').forEach((section)=>{
 
   const title = section.querySelector('.typ-effect');
@@ -518,35 +521,28 @@ document.querySelectorAll('.top-title-row-left-part').forEach((section)=>{
 
 });
 
-
-gsap.registerPlugin(ScrollTrigger);
+if(document.querySelector(".pro-cards-sec")){
 
 let tl = gsap.timeline({
   scrollTrigger:{
     trigger: ".pro-cards-sec",
     start: "top 70%",
     end: "center center",
-    scrub: 2   // momentum / inertia
+    scrub: 2
   }
 });
 
-/* TEXT */
-tl.fromTo(".professionals-card-top",
-{
-  y: 120,
-},
-{
-  y: 0,
-  ease: "power2.out"
-},0);
+tl.fromTo(".professionals-card-top",{y:120},{y:0});
+tl.fromTo(".professionals-card-bottom",{y:160},{y:-130},0);
 
+}
 
-/* IMAGE */
-tl.fromTo(".professionals-card-bottom",
-{
-  y: 160
-},
-{
-  y: -130,
-  ease: "power2.out"
-},0);
+window.addEventListener("load", () => {
+
+  ScrollTrigger.refresh();
+
+  setTimeout(() => {
+    ScrollTrigger.refresh();
+  }, 500);
+
+});
