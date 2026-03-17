@@ -312,23 +312,32 @@ $(document).ready(function () {
     ]
   });
 
-  $('.latest-projects__slider').slick({
-  slidesToShow:3,
-  slidesToScroll:1,
-  infinite:true,
-  autoplay:true,
-  autoplaySpeed:0,
-  speed:6000,
-  cssEase:'linear',
-  arrows:false,
-  dots:false,
-  pauseOnHover:true,
-  responsive:[
-    {breakpoint:1024,settings:{slidesToShow:2}},
-    {breakpoint:600,settings:{slidesToShow:1}}
-  ]
-});
+ const $slider = $('.latest-projects__slider');
 
+  // If "no-slider" class exists → DO NOTHING (grid layout)
+  if ($slider.hasClass('no-slider')) {
+    return;
+  }
+
+  // Else → initialize slick
+  if ($slider.length) {
+    $slider.slick({
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      infinite: true,
+      autoplay: true,
+      autoplaySpeed: 0,
+      speed: 6000,
+      cssEase: 'linear',
+      arrows: false,
+      dots: false,
+      pauseOnHover: true,
+      responsive: [
+        { breakpoint: 1024, settings: { slidesToShow: 2 } },
+        { breakpoint: 600, settings: { slidesToShow: 1 } }
+      ]
+    });
+  }
 /* mouse follow button */
 $('.latest-projects__item-wrapper').on('mousemove',function(e){
   const btn=$(this).find('.latest-projects__btn');
@@ -388,20 +397,22 @@ $('.latest-projects__item-wrapper').on('mousemove',function(e){
 
 document.addEventListener("DOMContentLoaded", function () {
 
- const counter = document.querySelector(".trusted__number");
+  const counter = document.querySelector(".trusted__number");
 
-if(counter){
-  const target = +counter.getAttribute("data-target");
-}
+  if (!counter) return;
+
+  const target = +counter.getAttribute("data-target"); // ✅ FIXED
+
   let started = false;
 
   function startCounter() {
     let count = 0;
-    const duration = 2000; 
+    const duration = 2000;
     const increment = target / (duration / 16);
 
     function updateCounter() {
       count += increment;
+
       if (count < target) {
         counter.textContent = Math.floor(count).toLocaleString();
         requestAnimationFrame(updateCounter);
@@ -430,46 +441,54 @@ if(counter){
 const tabs = document.querySelectorAll(".pricing__tab");
 const indicator = document.querySelector(".pricing__tab-indicator");
 
-function moveIndicator(tab){
-  const parent = tab.parentElement;
+// Run only if tabs & indicator exist
+if (tabs.length && indicator) {
 
-  const tabRect = tab.getBoundingClientRect();
-  const parentRect = parent.getBoundingClientRect();
+  function moveIndicator(tab){
+    if (!tab) return; // safety
 
-  const left = tabRect.left - parentRect.left;
+    const parent = tab.parentElement;
 
-  indicator.style.width = tabRect.width + "px";
-  indicator.style.transform = `translateX(${left}px)`;
-}
+    const tabRect = tab.getBoundingClientRect();
+    const parentRect = parent.getBoundingClientRect();
 
-// initial position
-moveIndicator(document.querySelector(".pricing__tab--active"));
+    const left = tabRect.left - parentRect.left;
 
-tabs.forEach(tab => {
+    indicator.style.width = tabRect.width + "px";
+    indicator.style.transform = `translateX(${left}px)`;
+  }
 
-  tab.addEventListener("click", () => {
+  // initial position
+  const activeTab = document.querySelector(".pricing__tab--active");
+  moveIndicator(activeTab);
 
-    tabs.forEach(t => t.classList.remove("pricing__tab--active"));
-    tab.classList.add("pricing__tab--active");
+  tabs.forEach(tab => {
 
-    moveIndicator(tab);
+    tab.addEventListener("click", () => {
 
-    let target = tab.dataset.tab;
+      tabs.forEach(t => t.classList.remove("pricing__tab--active"));
+      tab.classList.add("pricing__tab--active");
 
-    document.querySelectorAll(".pricing__content")
-      .forEach(content => {
+      moveIndicator(tab);
 
-        content.classList.remove("pricing__content--active");
+      let target = tab.dataset.tab;
 
-        if(content.dataset.content === target){
-          content.classList.add("pricing__content--active");
-        }
+      document.querySelectorAll(".pricing__content")
+        .forEach(content => {
 
-      });
+          content.classList.remove("pricing__content--active");
+
+          if(content.dataset.content === target){
+            content.classList.add("pricing__content--active");
+          }
+
+        });
+
+    });
 
   });
 
-});
+}
 
 // select all titles
 
@@ -477,6 +496,10 @@ document.querySelectorAll('.top-title-row-left-part').forEach((section)=>{
 
   const title = section.querySelector('.typ-effect');
   const heading = section.querySelector('h2');
+
+    // ❗ IMPORTANT CHECK
+  if (!title || !heading) return;
+
 
   // split words
   let words = title.innerText.split(" ");
@@ -545,4 +568,25 @@ window.addEventListener("load", () => {
     ScrollTrigger.refresh();
   }, 500);
 
+});
+
+// ONLY for grid (no-slider)
+$('.latest-projects__slider.no-slider .latest-projects__item-wrapper')
+.on('mousemove', function(e){
+
+  const btn = $(this).find('.latest-projects__btn')[0];
+  const rect = this.getBoundingClientRect();
+
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  btn.style.left = x + 'px';
+  btn.style.top = y + 'px';
+
+})
+.on('mouseenter', function(){
+  $(this).find('.latest-projects__btn').css('opacity', 1);
+})
+.on('mouseleave', function(){
+  $(this).find('.latest-projects__btn').css('opacity', 0);
 });

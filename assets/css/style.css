@@ -3484,3 +3484,20 @@ ul.prioritycard-list p span.text-icon {
     position: relative;
     overflow: hidden;
 }
+
+
+.latest-projects__slider.no-slider {
+    max-width: 1240px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+}
+
+.latest-projects__slider.no-slider .latest-projects__item {
+    width: calc(50% - 16px);
+    padding: 0px;
+    max-width: 527px;
+}
