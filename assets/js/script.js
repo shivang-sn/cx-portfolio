@@ -185,6 +185,10 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+
+  // ❗ STOP animation below 1024
+  if (window.innerWidth <= 1024) return;
+
   const cards = gsap.utils.toArray(".results__process-card");
 
   const positions = [
@@ -214,7 +218,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function shuffleLeftToRight() {
-    // LEFT → RIGHT movement
     activeIndex = (activeIndex + 1) % cards.length;
     render();
   }
@@ -229,32 +232,31 @@ document.addEventListener("DOMContentLoaded", function () {
     startAuto();
   }
 
-  /* INIT */
   render();
   startAuto();
 
-  /* CLICK */
   cards.forEach((card) => {
     card.addEventListener("click", restartShuffle);
   });
 
-  document.querySelectorAll(".blog__card").forEach((wrapper) => {
-    const pill = wrapper.querySelector(".blog__cursor-pill");
+});
 
-    wrapper.addEventListener("mousemove", (e) => {
-      const rect = wrapper.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+document.querySelectorAll(".blog__card").forEach((wrapper) => {
 
-      pill.style.left = x + "px";
-      pill.style.top = y + "px";
-      pill.style.opacity = "1";
-    });
+  const pill = wrapper.querySelector(".blog__cursor-pill");
+  if (!pill) return; // ✅ prevent error
 
-    wrapper.addEventListener("mouseleave", () => {
-      pill.style.opacity = "0";
-    });
+  wrapper.addEventListener("mousemove", (e) => {
+    const rect = wrapper.getBoundingClientRect();
+    pill.style.left = (e.clientX - rect.left) + "px";
+    pill.style.top = (e.clientY - rect.top) + "px";
+    pill.style.opacity = "1";
   });
+
+  wrapper.addEventListener("mouseleave", () => {
+    pill.style.opacity = "0";
+  });
+
 });
 
 
@@ -589,4 +591,26 @@ $('.latest-projects__slider.no-slider .latest-projects__item-wrapper')
 })
 .on('mouseleave', function(){
   $(this).find('.latest-projects__btn').css('opacity', 0);
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const hamburger = document.querySelector(".header__hamburger");
+  const nav = document.querySelector(".header__nav");
+
+  if (hamburger && nav) {
+    hamburger.addEventListener("click", function () {
+
+      // toggle active on hamburger
+      this.classList.toggle("active");
+
+      // toggle active on nav
+      nav.classList.toggle("active");
+
+      // optional (for body scroll lock)
+      document.body.classList.toggle("menu-open");
+    });
+  }
+
 });

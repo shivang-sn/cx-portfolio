@@ -15,29 +15,40 @@
   <header class="header__main">
     <div class="header-container">
       <div class="row header__row">
+
         <a href="/" class="header__logo-link">
           <img src="./assets/images/logo.svg" alt="fade logo" class="header__logo-img">
         </a>
+
         <nav class="header__nav">
           <ul class="header__nav-list">
             <li class="header__nav-list-item"><a class="header__nav-list-link" href="/projects.html">Projects</a></li>
-            <li class="header__nav-list-item"><a class="header__nav-list-link" href="/services.html">Services</a></li>
+            <li class="header__nav-list-item"><a class="header__nav-list-link" href="#service">Services</a></li>
             <li class="header__nav-list-item"><a class="header__nav-list-link" href="/blog.html">Blog</a></li>
             <li class="header__nav-list-item"><a class="header__nav-list-link" href="/contact.html">Contact</a></li>
             <li class="header__nav-list-item">
               <a href="javascript:void(0)" class="header__nav-btn header__nav-list-link">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="24" height="24" fill="#FFFFFF"
-                  class="header__nav-btn-icon">
-                  <path
-                    d="M197.58,129.06,146,110l-19-51.62a15.92,15.92,0,0,0-29.88,0L78,110l-51.62,19a15.92,15.92,0,0,0,0,29.88L78,178l19,51.62a15.92,15.92,0,0,0,29.88,0L146,178l51.62-19a15.92,15.92,0,0,0,0-29.88ZM137,164.22a8,8,0,0,0-4.74,4.74L112,223.85,91.78,169A8,8,0,0,0,87,164.22L32.15,144,87,123.78A8,8,0,0,0,91.78,119L112,64.15,132.22,119a8,8,0,0,0,4.74,4.74L191.85,144ZM144,40a8,8,0,0,1,8-8h16V16a8,8,0,0,1,16,0V32h16a8,8,0,0,1,0,16H184V64a8,8,0,0,1-16,0V48H152A8,8,0,0,1,144,40ZM248,88a8,8,0,0,1-8,8h-8v8a8,8,0,0,1-16,0V96h-8a8,8,0,0,1,0-16h8V72a8,8,0,0,1,16,0v8h8A8,8,0,0,1,248,88Z" />
-                </svg>
-                <span class="">Buy Template</span>
+                <!-- same SVG -->
+                <span>Buy Template</span>
               </a>
             </li>
           </ul>
         </nav>
+
+        <!-- ✅ ADD THIS (Hamburger SVG) -->
+        <div class="header__hamburger js-menu-toggle">
+          <div class="icon-wrapper">
+            <span class="line">
+
+            </span>
+            <span class="line">
+
+            </span>
+          </div>
+        </div>
+
       </div>
-    </div>
+
   </header>
   <!-- ===== Header Section End ===== -->
 
@@ -360,7 +371,7 @@
   </section>
   <!-- ===== Results Section End ===== -->
 
-  <section class="offer__section sec-gap">
+  <section class="offer__section sec-gap" id="service">
     <div class="page__container">
       <div class="radar">
         <!-- rings -->

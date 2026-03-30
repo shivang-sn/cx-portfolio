@@ -4078,7 +4078,7 @@ ul.prioritycard-list p span.text-icon {
 }
 
 .social-links__divider {
-  width: 40px;
+  width: 100%;
   height: 1px;
   background: rgba(255, 255, 255, 0.2);
 }
@@ -4119,4 +4119,269 @@ ul.prioritycard-list p span.text-icon {
 
 .social-links__link:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+
+/*30-03-2026*/
+.header__hamburger.js-menu-toggle {
+  display: none;
+}
+
+@media only screen and (max-width:1200px) {
+  .header__hamburger.js-menu-toggle {
+    display: block;
+  }
+
+  nav.header__nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    backdrop-filter: blur(12px);
+    background: var(--bg-surface-primary);
+    z-index: 9;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  }
+
+
+  nav.header__nav.active {
+    bottom: auto;
+    top: 100%;
+
+  }
+
+  ul.header__nav-list {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px 18px 64px;
+  }
+
+  .header__hamburger.js-menu-toggle {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* =========================
+   GLOBAL RESPONSIVE FIXES
+========================= */
+
+.row {
+  flex-wrap: wrap;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* =========================
+   TABLET (1024px)
+========================= */
+@media (max-width: 1024px) {
+
+  .hero__section {
+    padding: 160px 20px 80px;
+    height: auto;
+    min-height: auto;
+  }
+
+  .hero__section-wrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero__section-content {
+    max-width: 100%;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  h1.hero__section-headline {
+    font-size: 56px;
+  }
+
+  .hero__section-description {
+    max-width: 100%;
+  }
+
+  .hero__section-review-img-box {
+    width: 300px;
+  }
+
+  .top-title-row {
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .results__process-wrapper {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .offer_inner-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .offer_inner-row.reverse-row {
+    flex-direction: column-reverse;
+  }
+
+  .results__process-wrapper {
+    position: relative;
+    height: auto;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .results__process-card {
+    position: relative;
+    top: unset;
+    width: 100%;
+    background: var(--bg-page);
+    bottom: 0;
+    height: 100%;
+    cursor: pointer;
+    padding: 20px;
+  }
+
+  .results__process-card .process-card-inner {
+    padding: 24px;
+  }
+
+  .results__section .top-title-row {
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+
+  .card-wrapper-inner {
+    gap: 57px;
+  }
+
+  .offer_inner-card {
+    width: 100%;
+  }
+
+  .offer_inner-card.no-slider {
+    width: 100%;
+  }
+
+  .blog__container {
+    grid-template-columns: 1fr;
+  }
+
+  .blog__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .blog__image-wrapper {
+    width: 100%;
+  }
+
+  .blog__grid img.blog__image {
+    height: auto;
+    aspect-ratio: 1.61;
+  }
+
+  .faq__section .sec-row {
+    flex-direction: column;
+  }
+
+  .pricing__main-sec .top-title-row.text-center {
+    align-items: center;
+  }
+}
+
+/* =========================
+   MOBILE (768px)
+========================= */
+@media (max-width: 768px) {
+
+  .header__nav {
+    display: none;
+    /* hide menu */
+  }
+
+  .header-container {
+    padding: 0 20px;
+  }
+
+  .hero__section {
+    padding: 140px 20px 60px;
+  }
+
+  h1.hero__section-headline {
+    font-size: 40px;
+    line-height: 1.3;
+  }
+
+  .hero__section-btn-wrapper {
+    flex-direction: column;
+    width: auto;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .hero__social-links {
+    justify-content: center;
+  }
+
+  .hero__section-review {
+    margin-top: 30px;
+  }
+
+  .hero__section-review-img-box {
+    width: 100%;
+  }
+
+  .hero__section-circle {
+    display: none;
+  }
+
+  .sec-gap {
+    padding: 60px 20px;
+  }
+
+  .offers__slider .offers__item {
+    width: auto;
+  }
+}
+
+/* =========================
+   SMALL MOBILE (480px)
+========================= */
+@media (max-width: 480px) {
+
+  h1.hero__section-headline {
+    font-size: 32px;
+  }
+
+  .btn {
+    padding: 12px 20px;
+  }
+
+  span.btn-text {
+    font-size: 14px;
+  }
+
+  .hero__section-status {
+    justify-content: center;
+  }
+
+  .hero__section-description {
+    font-size: 14px;
+  }
+
+  .top-title-row h2 {
+    font-size: 24px;
+  }
 }
