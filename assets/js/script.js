@@ -186,10 +186,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  // ❗ STOP animation below 1024
-  if (window.innerWidth <= 1024) return;
-
   const cards = gsap.utils.toArray(".results__process-card");
+
+  if (!cards.length) return;
 
   const positions = [
     { right: "0%", scale: 1, opacity: 1, blur: 0, z: 3 },
@@ -198,7 +197,8 @@ document.addEventListener("DOMContentLoaded", function () {
   ];
 
   let activeIndex = 0;
-  let timer;
+  let timer = null;
+  let isActive = false;
 
   function render() {
     cards.forEach((card, i) => {
@@ -217,26 +217,59 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  function shuffleLeftToRight() {
+  function shuffle() {
     activeIndex = (activeIndex + 1) % cards.length;
     render();
   }
 
-  function startAuto() {
-    timer = setInterval(shuffleLeftToRight, 4000);
+  function start() {
+    if (isActive) return;
+
+    isActive = true;
+    render();
+    timer = setInterval(shuffle, 4000);
+
+    cards.forEach(card => {
+      card.addEventListener("click", restart);
+    });
   }
 
-  function restartShuffle() {
+  function stop() {
+    if (!isActive) return;
+
+    isActive = false;
     clearInterval(timer);
-    shuffleLeftToRight();
-    startAuto();
+
+    cards.forEach(card => {
+      card.removeEventListener("click", restart);
+    });
+
+    // reset styles (important)
+    gsap.set(cards, {
+      clearProps: "all"
+    });
   }
 
-  render();
-  startAuto();
+  function restart() {
+    clearInterval(timer);
+    shuffle();
+    timer = setInterval(shuffle, 4000);
+  }
 
-  cards.forEach((card) => {
-    card.addEventListener("click", restartShuffle);
+  function check() {
+    if (window.innerWidth > 1024) {
+      start();
+    } else {
+      stop();
+    }
+  }
+
+  // init
+  check();
+
+  // resize fix 🔥
+  window.addEventListener("resize", () => {
+    check();
   });
 
 });
@@ -335,8 +368,7 @@ $(document).ready(function () {
       dots: false,
       pauseOnHover: true,
       responsive: [
-        { breakpoint: 1024, settings: { slidesToShow: 2 } },
-        { breakpoint: 600, settings: { slidesToShow: 1 } }
+        { breakpoint: 1024, settings: "unslick" }
       ]
     });
   }
@@ -379,8 +411,7 @@ $('.latest-projects__item-wrapper').on('mousemove',function(e){
   dots:false,
   pauseOnHover:true,
   responsive:[
-    {breakpoint:1024,settings:{slidesToShow:2}},
-    {breakpoint:600,settings:{slidesToShow:1}}
+    {breakpoint:1024, settings: "unslick"}
   ]
 });
 
